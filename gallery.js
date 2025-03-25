@@ -66,7 +66,7 @@ const images = [
 
 const galleryContainer = document.querySelector('.gallery');
 
-// Create gallery markup
+
 function createGalleryMarkup(images) {
   return images.map(({ preview, original, description }) => `
     <li class="gallery-item">
@@ -82,32 +82,32 @@ function createGalleryMarkup(images) {
   `).join('');
 }
 
-// Add gallery items to the DOM
+
 galleryContainer.innerHTML = createGalleryMarkup(images);
 
-// Initialize modal instance but don't open it yet
+
 let modal = null;
 
-// Event delegation for gallery clicks
+
 galleryContainer.addEventListener('click', onGalleryClick);
 
 function onGalleryClick(event) {
-  // Prevent default action (downloading the image)
+  
   event.preventDefault();
   
-  // Check if we clicked on image
+  
   if (event.target.nodeName !== 'IMG') {
     return;
   }
   
-  // Get the large image URL
+  
   const largeImageURL = event.target.dataset.source;
   
-  // Create and open modal with the large image
+  
   modal = basicLightbox.create(`
     <img src="${largeImageURL}" alt="${event.target.alt}" width="1100">
   `, {
-    // Add event handlers for the Escape key
+    
     onShow: () => {
       window.addEventListener('keydown', onEscKeyPress);
     },
@@ -119,7 +119,7 @@ function onGalleryClick(event) {
   modal.show();
 }
 
-// Handle Escape key press
+
 function onEscKeyPress(event) {
   if (event.code === 'Escape' && modal) {
     modal.close();
